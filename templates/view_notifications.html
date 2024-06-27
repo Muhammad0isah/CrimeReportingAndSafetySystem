@@ -1,0 +1,14 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Notifications</h2>
+  <ul>
+  {% for notification in notifications %}
+    <li>
+      <a href="{% url 'read_notification' notification.id %}">{{ notification.content }}</a>
+    </li>
+  {% empty %}
+    <li>No notifications.</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

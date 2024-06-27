@@ -1,0 +1,3 @@
+{% for log in logs %}
+<p>{{ log.action_time }}: {{ log.user }} {{ log.get_action_flag_display }} {{ log.object_repr }}</p>
+{% endfor %}
