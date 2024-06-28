@@ -12,12 +12,12 @@ class CrimeReportForm(forms.ModelForm):
             'class': 'form-control'
         })
     )
-    type_of_crime = forms.ChoiceField(
-        choices=CrimeReport.CRIME_TYPES,
-        widget=forms.Select(attrs={
-            'class': 'form-control'
-        })
-    )
+    # type_of_crime = forms.ChoiceField(
+    #     choices=CrimeReport.CRIME_TYPES,
+    #     widget=forms.Select(attrs={
+    #         'class': 'form-control'
+    #     })
+    # )
 
     class Meta:
         model = CrimeReport
