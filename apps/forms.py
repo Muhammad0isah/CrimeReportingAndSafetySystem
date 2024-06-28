@@ -25,6 +25,13 @@ class CrimeReportForm(forms.ModelForm):
 
 
 class ProfileForm(forms.ModelForm):
+    birth_date = forms.DateField(
+        input_formats=['%Y-%m-%d'],
+        widget=forms.DateInput(attrs={
+            'type': 'date',
+            'class': 'form-control'
+        })
+    )
     class Meta:
         model = Profile
         fields = ['bio', 'location', 'birth_date', 'picture']

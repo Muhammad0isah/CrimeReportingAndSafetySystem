@@ -15,7 +15,9 @@ from .forms import CrimeReportForm
 from django.shortcuts import render, redirect
 # Create your views here.
 def home(request):
-    return render(request, 'index.html')
+    notifications = Notification.objects.filter(user=request.user)
+    unread_notifications = notifications.filter(read=False).count()
+    return render(request, 'index.html',{'unread_notifications': unread_notifications})
 
 @login_required()
 def report(request):
@@ -147,10 +149,9 @@ def create_notification(request):
 
 @login_required
 def view_notifications(request):
-    notifications = Notification.objects.filter(user=request.user)
-    return render(request, 'view_notifications.html', {'notifications': notifications})
-
-
+    notifications = Notification.objects.filter(user=request.user).order_by('-timestamp')
+    unread_notifications = notifications.filter(read=False).count()
+    return render(request, 'view_notifications.html', {'notifications': notifications, 'unread_notifications': unread_notifications})
 @login_required
 def read_notification(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id)
