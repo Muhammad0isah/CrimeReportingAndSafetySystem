@@ -4,6 +4,7 @@ from django import forms
 from .models import Notification, User
 from .models import CrimeReport
 
+
 class CrimeReportForm(forms.ModelForm):
     date_and_time = forms.DateTimeField(
         input_formats=['%Y-%m-%dT%H:%M'],
@@ -12,6 +13,7 @@ class CrimeReportForm(forms.ModelForm):
             'class': 'form-control'
         })
     )
+
     # type_of_crime = forms.ChoiceField(
     #     choices=CrimeReport.CRIME_TYPES,
     #     widget=forms.Select(attrs={
@@ -23,7 +25,6 @@ class CrimeReportForm(forms.ModelForm):
         model = CrimeReport
         fields = ['type_of_crime', 'date_and_time', 'location', 'description', 'evidence']
 
-
 class ProfileForm(forms.ModelForm):
     birth_date = forms.DateField(
         input_formats=['%Y-%m-%d'],
@@ -32,12 +33,10 @@ class ProfileForm(forms.ModelForm):
             'class': 'form-control'
         })
     )
+
     class Meta:
         model = Profile
         fields = ['bio', 'location', 'birth_date', 'picture']
-
-
-
 
 
 class NotificationForm(forms.ModelForm):

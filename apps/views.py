@@ -31,13 +31,19 @@ def report(request):
             return redirect('report')
     else:
         form = CrimeReportForm()
+    notifications = Notification.objects.filter(user=request.user)
+    unread_notifications = notifications.filter(read=False).count()
 
-    return render(request, 'report.html', {'form': form})
+    return render(request, 'report.html', {'form': form,'unread_notifications': unread_notifications})
 def about(request):
-    return render(request, 'about.html')
+    notifications = Notification.objects.filter(user=request.user)
+    unread_notifications = notifications.filter(read=False).count()
+    return render(request, 'about.html',{'unread_notifications': unread_notifications})
 
 def safety_tips(request):
-    return render(request, 'safety-tips.html')
+    notifications = Notification.objects.filter(user=request.user)
+    unread_notifications = notifications.filter(read=False).count()
+    return render(request, 'safety-tips.html',{'unread_notifications': unread_notifications})
 
 
 
@@ -103,7 +109,9 @@ def user_login(request):
 
 @login_required
 def view_profile(request):
-    return render(request, 'view-profile.html', {'user': request.user})
+    notifications = Notification.objects.filter(user=request.user)
+    unread_notifications = notifications.filter(read=False).count()
+    return render(request, 'view-profile.html', {'user': request.user,'unread_notifications': unread_notifications})
 
 @login_required
 def edit_profile(request):
