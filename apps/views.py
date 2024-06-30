@@ -15,8 +15,7 @@ from .forms import CrimeReportForm
 from django.shortcuts import render, redirect
 # Create your views here.
 def home(request):
-    notifications = Notification.objects.filter(user=request.user)
-    unread_notifications = notifications.filter(read=False).count()
+    unread_notifications = Notification.objects.filter(read=False).count()
     return render(request, 'index.html',{'unread_notifications': unread_notifications})
 
 @login_required()
@@ -31,18 +30,14 @@ def report(request):
             return redirect('report')
     else:
         form = CrimeReportForm()
-    notifications = Notification.objects.filter(user=request.user)
-    unread_notifications = notifications.filter(read=False).count()
-
+    unread_notifications = Notification.objects.filter(read=False).count()
     return render(request, 'report.html', {'form': form,'unread_notifications': unread_notifications})
 def about(request):
-    notifications = Notification.objects.filter(user=request.user)
-    unread_notifications = notifications.filter(read=False).count()
+    unread_notifications = Notification.objects.filter(read=False).count()
     return render(request, 'about.html',{'unread_notifications': unread_notifications})
 
 def safety_tips(request):
-    notifications = Notification.objects.filter(user=request.user)
-    unread_notifications = notifications.filter(read=False).count()
+    unread_notifications = Notification.objects.filter(read=False).count()
     return render(request, 'safety-tips.html',{'unread_notifications': unread_notifications})
 
 
